@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 模板测试</title>
+		<script src='../../common/js/vue/vue.min.js'></script>
+	</head>
+	<body>
+		<div id="demo4">
+			<div><input v-model='content'></div>
+			<div v-once>{{content}}</div>
+			<div v-once v-if="content != '1' && content != ''">{{content}}</div>
+
+		</div>
+
+		<script>
+			var app = {
+				el: '#demo4',
+				data() {
+					return{
+						content: '1',
+					}
+				},
+				methods: {}
+			}
+			new Vue(app)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,8 @@
+流程控制对于一门开发语言来说，是非常基础的内容，但是在html中使用，却非常惊艳。
+<br>与后端渲染的jsp、和templatejs等不同，vue的流程控制，会更加优雅。
+<br>1、v-if和v-if-else
+<br><user-tab></user-tab> 根据条件控制组件装载。
+<br>2、v-show
+<br><user-tab></user-tab> 组件完成装载，根据条件控制显示。
+<br>3、v-for
+<br><user-tab></user-tab> 遍历列表完成装载。

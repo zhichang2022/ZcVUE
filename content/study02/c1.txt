@@ -1,0 +1,15 @@
+我们在上节课的手动实现双向绑定中已经了解几种数据绑定的方式，下面主要讲解VUE中的数据绑定方式：
+<br> 1、v-text
+<br><user-tab></user-tab> v-text 类似与上一节手动实现双向绑定示例中的输入内容的显示，其显示内容同绑定数据的值相同，实现原理为element.innerText = v
+<br><user-tab></user-tab>2.1、{}
+<br><user-tab></user-tab><user-tab></user-tab>语法糖，相当于v-text
+<br> 2、v-html
+<br><user-tab></user-tab> v-html 类似与上一节手动实现双向绑定示例中的输入内容的显示，其显示内容为绑定数据的元素渲染效果，实现原理为element.innerHTML = v
+<br><user-tab></user-tab> 提问一个问题，手动innerHTML到页面的全局组件是否会被VUE渲染?
+<br> 3、v-model
+<br><user-tab></user-tab> 语法糖，实际效果等于 v-bind:value 和 v-on:input, 类似与上一节手动实现双向绑定示例中的第一个输入框
+<br> 4、v-bind
+<br><user-tab></user-tab> 属性绑定指令，可以简化为:(冒号)，通常是动态绑定属性使用。
+<br><user-tab></user-tab> 4、1、v-bind:value
+<br><user-tab></user-tab><user-tab></user-tab>  v-value 类似与上一节手动实现双向绑定示例中的第二个输入框，其值会随绑定数据的值变化而变化
+<br>请看以下范例

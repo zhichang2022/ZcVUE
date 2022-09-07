@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 模板测试</title>
+		<script src='../../common/js/vue/vue.min.js'></script>
+	</head>
+	<body>
+		<div id="demo3">
+			<div v-if="name == 'A'">我是A</div>
+			<div v-else-if="name == 'B'">我是B</div>
+			<div v-else>我是C</div>
+			<div v-show="name == 'A'">显示A</div>
+			<div v-show="name == 'B'">显示B</div>
+			<div><button @click="name= name=='A'?'B':'A'">切换1</button><button @click="change">切换2</button></div>
+			<div>
+				<select v-model="name">
+					<option v-for="(item,index) in list" :value="item.value">{{item.label}}</option>
+				</select>
+			</div>
+			<div v-for="(item,index) in 3">index：{{index}}，value:{{item}} </div>
+			<script>
+				var app = {
+					el: '#demo3',
+					data(){
+						return{
+							name: "A",
+							select: "A",
+							list: [{
+									value: "A",
+									label: "选项A"
+								},
+								{
+									value: "B",
+									label: "选项B"
+								},
+								{
+									value: "C",
+									label: "选项C"
+								},
+							]
+						}
+					},
+					computed: {},
+					methods: {
+						change() {
+							this.name = this.name == 'A' ? 'B' : 'A'
+						}
+					}
+				}
+				new Vue(app)
+			</script>
+	</body>
+</html>

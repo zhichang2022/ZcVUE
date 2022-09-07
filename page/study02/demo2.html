@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 模板测试</title>
+		<script src='../../common/js/vue/vue.min.js'></script>
+	</head>
+	<body>
+		<div id="demo2">
+			<div><input v-on:input="input($event)" >监控输入内容{{char}}</div>
+			<div><button @click="clickHandle()">点击事件</button></div>
+			<div><input v-model="content" placeholder="请输入内容"></div>
+			<div><button @click="getContent(content)">获取content内容</button></div>
+			<div><button @click="getContent2">获取content内容</button></div>
+		</div>
+
+		<script>
+			var app = {
+				el: '#demo2',
+				data: {
+					content: '请输入内容',
+					char:'',
+				},
+				computed: {
+					computedClazz: function() {
+						if (this.clazz == 'red') {
+							return ['red']
+						} else {
+							return ['blue']
+						}
+					}
+				},
+				methods: {
+					input(e) {
+						this.char = e.data
+					},
+					clickHandle(){
+						alert("点击了按钮")
+					},
+					getContent(content){
+						alert("输入框内容为："+content)
+					},
+					getContent2(){
+						alert("输入框内容为："+this.content)
+					}
+				}
+			}
+			new Vue(app)
+		</script>
+	</body>
+</html>

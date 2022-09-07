@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 模板测试</title>
+		<script src='../../common/js/vue/vue.min.js'></script>
+		<style>
+			.blue {
+				color: blue;
+			}
+
+			.red {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="demo1">
+			<div><input v-model="content"> 双向绑定，影响绑定内容</div>
+			<div><input v-bind:value="content"> 属性绑定，不影响绑定内容</div>
+			<div><input :value="content">属性绑定，不影响绑定内容</div>
+			<div>
+				v-text内容：显示绑定数据的值
+				<div v-text="content"></div>
+			</div>
+			<div>
+				内容：显示绑定数据的值
+				<div>{{content}}</div>
+			</div>
+			<div>
+				v-html内容：显示绑定数据的渲染
+				<div v-html="content"></div>
+			</div>
+			<div v-bind:class="[clazz]">
+				动态变更文字属性
+			</div>
+			<div :class="[{'blue':clazz=='blue'},{'red':clazz=='red'}]">
+				动态变更文字属性
+			</div>
+			<div :class="getClazz()">
+				动态变更文字属性
+			</div>
+			<div :class="computedClazz">
+				动态变更文字属性
+			</div>
+			<div :style="{'color':clazz}">
+				动态变更文字属性
+			</div>
+			<div>
+				<button @click="change('blue')">文字显示为蓝色</button>
+				<button @click="change('red')">文字显示为红色</button>
+				值{{clazz}}
+			</div>
+			<div style="color: red;font-weight: 600;">{{tips}}</div>
+		</div>
+
+		<script>
+			var app = {
+				el: '#demo1',
+				data: {
+					content: '<span style="color:red;">Hello World!</span>',
+					clazz: "red",
+					tips:""
+				},
+				computed: {
+					computedClazz: function() {
+						if (this.clazz == 'red') {
+							return ['red']
+						} else {
+							return ['blue']
+						}
+					}
+				},
+				methods: {
+					change(v) {
+						this.clazz = v
+					},
+					getClazz() {
+						return [{
+							'blue': this.clazz == 'blue'
+						}, {
+							'red': this.clazz == 'red'
+						}]
+					}
+				},
+				mounted(){
+					let T = "请点击以上按钮，切换颜色，查看效果。"
+					let that = this
+					setInterval(function(){
+						if(that.tips == T){
+							that.tips = ""
+						}else{
+							that.tips = T.substr(0,that.tips.length + 1)
+						}
+					},200);
+				}
+			}
+			new Vue(app)
+		</script>
+	</body>
+</html>

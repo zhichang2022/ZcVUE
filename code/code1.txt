@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 模板测试</title>
+		<script src='../../common/js/vue/vue.min.js'></script>
+	</head>
+	<body>
+		<div id="demo2">
+			<p>{{ message }}</p>
+		</div>
+
+		<script>
+			var app = {
+				el: '#demo2',
+				template: '<div>{{content}}</div>',
+				data: {
+					message: 'Hello Vue JS!',
+					content: 'Hello World!'
+				}
+			}
+			new Vue(app)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>简单实现双向绑定</title>
+	</head>
+	<body>
+		<input name="content" placeholder="请输入内容" oninput="data.content = this.value" />
+		<input name="content" placeholder="请输入内容" oninput="setContent(this.value)" />
+		<div>
+			输入的内容：<span name="content"></span>
+		</div>
+		<div>
+			输入的内容转换为页面：<div name="content"></div>
+		</div>
+		<script>
+			const contentElements = document.getElementsByName("content")
+			var data = {
+				set content(v) {
+					contentElements.forEach(e => {
+						if (e.value != v) {
+							console.log(e)
+							if (e.tagName == "INPUT") {
+								e.value = v
+							}
+							if(e.tagName == "DIV"){
+								e.innerHTML = v
+							}
+							if(e.tagName == "SPAN"){
+								e.innerText = v
+							}
+						}
+					})
+					content = v;
+				},
+				get content() {
+					return content;
+				}
+			}
+			Object.defineProperty(data, "content", {
+				get: function() {
+					return this._content
+				}
+			})
+
+			function setContent(t) {
+				console.log(t.value)
+			}
+		</script>
+	</body>
+</html>

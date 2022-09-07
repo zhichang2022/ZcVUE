@@ -1,0 +1,4 @@
+事件绑定相对比较容易理解。
+<br>使用浏览器的F12打开 开发者工具，在console中输入document.on，会显示许多事件,
+<br>对应的每种事件，在vue中的映射就是onclick 变成了 v-on:click 或则 简化为 @click, 并且方法体必须写在模板对象的methods属性下。
+<br>下面我们举一个简单的例子

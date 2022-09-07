@@ -1,0 +1,5 @@
+template实现页面渲染
+<br>如果不为空,将覆盖原有元素的子元素
+<br>其重要作用体现在vue组件中
+<br>.vue文件中的结构没有直接体现该形式,实际上时node将<template></template>中的内容,加载到export default {}对象中,
+<br>本框架中的import.js模拟node.js的方式实现了该形式
