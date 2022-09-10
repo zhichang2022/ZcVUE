@@ -1,0 +1,71 @@
+<template>
+	<div class="tree-node">
+		... ...
+		<div class="tree-node-children" v-show="show">
+			<tree-node :name="name+'_'+index" v-for="(item,index) in children" :label="item.label"
+				:children="item.children" :level="item.level" :self="item" @selected="selectedEvent"> <!-- 设置递归绑定事件 -->
+			</tree-node>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		... ...
+		methods: {
+			elementClassRefresh() {
+				this.show = !this.show
+				... ...
+				//控制页面显示效果。 高亮选择节点的父级节点，通过背景标记选中节点
+			},
+			//接收递归组件内的传参
+			selectedEvent(v) {
+				//将参数传递给父组件。
+				this.$emit("selected", v)
+			},
+			selected() {
+				this.elementClassRefresh() //刷新样式
+				this.selectedEvent({
+					self: this.self,
+					index: this.name,
+					label: this.label,
+					children: this.children
+				})
+			}
+		},
+		... ...
+	}
+</script>
+
+
+<!DOCTYPE html>
+<html>
+	<body>
+		<div id="app">
+			<tree-node :name="treeNode.name" :label="treeNode.label" :children="treeNode.children"
+				:level="treeNode.level" :self="treeNode" @selected="showSelectedNode">
+			</tree-node>
+			<div>你选择的节点：{{content}}</div>
+		</div>
+		<script>
+			const treeNode = ImportHtml("components/tree-node4")
+			const triangleIcon = ImportHtml("components/triangle-icon")
+			var config = {
+				el: '#app',
+				data: {
+					content:"",
+					treeNode: {... ... }
+				},
+				methods: {
+					
+					showSelectedNode(v){
+						this.content = v.label
+					}
+				},
+			}
+			Vue.component('triangle-icon', triangleIcon)
+			Vue.component('tree-node', treeNode)
+			var app = new Vue(config)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>简单树形组件01</title>
+		<script src='../../common/js/vue/vue.min.js'></script>
+		<script src="js/base64.js"></script>
+		<script src="js/md5.js"></script>
+		<script src='js/import.js'></script>
+	</head>
+	<body>
+		<div id="app">
+			<tree-node></tree-node>
+		</div>
+		<script>
+			const treeNode = ImportHtml("components/tree-node1")
+			var config = {
+				el: '#app',
+				data: {},
+				methods: {},
+				components: {
+					treeNode
+				},
+			}
+			var app = new Vue(config)
+		</script>
+	</body>
+</html>

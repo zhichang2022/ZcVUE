@@ -1,0 +1,2 @@
+如果我们需要获取子组件的内部结构，可以通过为子组件设置ref属性，通过this.$ref[ref属性值]获取子组件的内容
+<br>这里我们通过this.$refs.zcTree.randomCoding()可以调用子组件的randomCoding方法。

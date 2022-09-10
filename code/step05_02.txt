@@ -1,0 +1,19 @@
+<template>
+	<div class="tree-node">
+		<div :name="name" class="tree-node-content" :style="{'padding-left': paddingLeft}">
+			<triangle-icon @click="selected" class="tree-icon" :expanded="show" v-if="children && children.length > 0">
+			</triangle-icon>
+			<div v-else class="tree-icon-blank"></div>
+			<span @click="selected">{{label}}</span>
+			<div class="tree-right">
+				<slot></slot>
+			</div>
+		</div>
+		<div class="tree-node-children" v-show="show">
+			<tree-node :name="name+'_'+index" v-for="(item,index) in children" :label="item.label"
+				:children="item.children" :level="item.level" :self="item" @selected="selectedEvent">
+				<slot></slot>
+			</tree-node>
+		</div>
+	</div>
+</template>

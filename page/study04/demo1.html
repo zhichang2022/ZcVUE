@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 模板测试</title>
+		<script src='../../common/js/vue/vue.min.js'></script>
+	</head>
+	<body>
+		<div id="demo1">
+			<span>{{msg}}</span>
+			<div v-html="console">
+			</div>
+		</div>
+
+		<script>
+			var content = ""
+			var app = {
+				el: '#demo1',
+				data: {
+					msg: 'msg'
+				},
+				computed: {
+					console() {
+						return content
+					}
+				},
+				beforeCreate() {
+					content += "<br>" + "----beforeCreate----"
+					console.log('----beforeCreate----')
+					content += "<br>" + this.msg
+					console.log(this.msg) //msg
+					content += "<br>" + this.$el
+					console.log(this.$el) //undefined
+				},
+				created() {
+					content += "<br><br>" + "----created----"
+					console.log('----created----')
+					content += "<br>" + this.msg
+					console.log(this.msg) //msg
+					content += "<br>" + this.$el
+					console.log(this.$el) 
+				},
+				beforeMount() {
+					content += "<br><br>" + "----beforeMount----"
+					console.log('----beforeMount----')
+					content += "<br>" + this.msg
+					console.log(this.msg) //msg
+					content += "<br>" + this.$el
+					console.log(this.$el) 
+				},
+				mounted() {
+					content += "<br><br>" + "----mounted----"
+					console.log('----mounted----')
+					content += "<br>" + this.msg
+					console.log(this.msg) //msg
+					content += "<br>" + this.$el
+					console.log(this.$el) 
+				}
+			}
+			new Vue(app)
+		</script>
+	</body>
+</html>

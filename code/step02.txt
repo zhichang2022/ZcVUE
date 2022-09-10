@@ -1,0 +1,89 @@
+<!-- end triangle-icon 组件内容 -->
+<template>
+	<i class="triangle-icon" :class="{expanded:expanded}">
+		<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+			<path fill="currentColor" d="M384 192v640l384-320.064z"></path>
+		</svg>
+	</i>
+</template>
+
+<script>
+	export default {
+		props:{
+			expanded:{
+				type: Boolean,
+				default:false,
+			}
+		}
+	}
+</script>
+<!-- end triangle-icon 组件内容 -->
+
+
+<!-- start tree-node 组件内容 -->
+<template>
+	<div class="tree-node">
+		<div class="tree-node-content" @click="selected">
+			<triangle-icon class="tree-icon" :expanded="show">
+			</triangle-icon>
+			<span>{{label}}</span>
+		</div>
+		<div class="tree-node-children" v-show="show">
+			<div v-for="item in children">{{item.label}}</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				show: false,
+				label: "新疆维吾尔自治区",
+				children:[
+					{label:"乌鲁木齐市"},
+					{label:"克拉玛依市"}
+				]
+			}
+		},
+		methods: {
+			selected() {
+				this.show = !this.show
+			}
+		}
+	}
+</script>
+<!-- end tree-node 组件内容 -->
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>简单树形组件01</title>
+		<script src='../../common/js/vue/vue.min.js'></script>
+		<script src="js/base64.js"></script>
+		<script src="js/md5.js"></script>
+		<script src='js/import.js'></script>
+	</head>
+	<body>
+		<div id="app">
+			<tree-node></tree-node>
+		</div>
+		<script>
+			const treeNode = ImportHtml("components/tree-node2")
+			const triangleIcon = ImportHtml("components/triangle-icon")
+			var config = {
+				el: '#app',
+				data: {},
+				methods: {},
+				components: {
+					treeNode,
+					
+				},
+			}
+			Vue.component('triangle-icon',triangleIcon) //全局注册 triangle-icon 组件
+			var app = new Vue(config)
+		</script>
+	</body>
+</html>

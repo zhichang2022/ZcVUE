@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>简单树形组件04</title>
+		<script src='../../common/js/vue/vue.min.js'></script>
+		<script src="js/base64.js"></script>
+		<script src="js/md5.js"></script>
+		<script src='js/import.js'></script>
+	</head>
+	<body>
+		<div id="app">
+			<tree-node :name="treeNode.name" :label="treeNode.label" :children="treeNode.children"
+				:level="treeNode.level" :self="treeNode" @selected="showSelectedNode">
+				<button>点击</button>
+			</tree-node>
+			<div>你选择的节点：{{content}}</div>
+		</div>
+		<script>
+			const treeNode = ImportHtml("components/tree-node5_01")
+			const triangleIcon = ImportHtml("components/triangle-icon")
+			var config = {
+				el: '#app',
+				data: {
+					content:"",
+					treeNode: {
+						label: '新疆维吾尔自治区',
+						level: 0,
+						name: 'tree_0',
+						children: [{
+							label: '乌鲁木齐市',
+							level: 1,
+							children: [{
+									label: '天山区',
+									level: 2,
+									children: [{
+										label: '人民广场',
+										level: 3
+									}]
+								},
+								{
+									label: '沙依巴克区',
+									level: 2,
+									children: []
+								},
+								{
+									label: '水磨沟区',
+									level: 2,
+									children: []
+								},
+								{
+									label: '经开区',
+									level: 2,
+									children: []
+								},
+								{
+									label: '新市区',
+									level: 2,
+									children: []
+								},
+								{
+									label: '米东区',
+									level: 2,
+									children: []
+								},
+								{
+									label: '达坂城区',
+									level: 2,
+									children: []
+								},
+								{
+									label: '乌鲁木齐县',
+									level: 2,
+									children: []
+								}
+							]
+						}]
+					}
+				},
+				methods: {
+					showSelectedNode(v){
+						this.content = v.label
+					}
+				},
+			}
+			Vue.component('triangle-icon', triangleIcon)
+			Vue.component('tree-node', treeNode)
+			var app = new Vue(config)
+		</script>
+	</body>
+</html>

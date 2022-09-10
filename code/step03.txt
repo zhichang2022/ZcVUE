@@ -1,0 +1,60 @@
+<template>
+	<div class="tree-node">
+		<div class="tree-node-content" :style="{'padding-left': paddingLeft}" @click="selected">
+			<triangle-icon class="tree-icon" :expanded="show" v-if="children && children.length > 0">
+			</triangle-icon>
+			<div v-else class="tree-icon-blank"></div>
+			<span>{{label}}</span>
+		</div>
+		<div class="tree-node-children" v-show="show">
+			<tree-node v-for="(item,index) in children" :label="item.label" :children="item.children"
+				:level="item.level" :self="item">
+			</tree-node>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		props: {
+			self: {
+				type: self,
+				default: {},
+			},
+			label: {
+				type: String,
+				require: true
+			},
+			level: {
+				type: Number,
+				require: true
+			},
+			children: {
+				type: Array,
+				default: [],
+			},
+		},
+		data() {
+			return {
+				show: false
+			}
+		},
+		methods: {
+			selected() {
+				this.show = !this.show
+			}
+		},
+		computed: {
+			paddingLeft() {
+				let level = this.level
+				let a = 14;
+				if (level) {
+					return '' + (a * level) + "px";
+				} else {
+					return '0px';
+				}
+			}
+		},
+		mounted() {}
+	}
+</script>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>简单树形组件08</title>
+		<script src='../../common/js/vue/vue.min.js'></script>
+		<script src="js/base64.js"></script>
+		<script src="js/md5.js"></script>
+		<script src='js/import.js'></script>
+		<style>
+			button {
+				background: #c8cf3c;
+				color: #fff;
+				border: none;
+				line-height: 20px;
+				border-radius: 5px;
+				box-shadow: 1px 1px 3px 0 #999;
+				margin-right: 10px;
+				font-size: 13px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<zc-tree :list="treeList" @selected="selected" @filter="treeFilter" ref="zcTree">
+				<template #default="{data}">
+					{{data.desc}}
+				</template>
+			</zc-tree>
+			<div>选中节点的data：{{content}}</div>
+			<div>
+				<button @click="getCode">子组件randomCoding方法</button>
+			</div>
+			<div>获取子组件的randomCoding值：{{randomCoding}}</div>
+		</div>
+		<script>
+			const zcTree = ImportHtml("components/zc-tree_02")
+			const treeNode = ImportHtml("components/tree-node6")
+			const triangleIcon = ImportHtml("components/triangle-icon")
+			var config = {
+				el: '#app',
+				data: {
+					randomCoding: "",
+					content: "",
+					treeList: [{
+						label: '新疆维吾尔自治区',
+						children: [{
+							label: '乌鲁木齐市',
+							children: [{
+									label: '天山区',
+									children: [{
+										label: '人民广场'
+									}]
+								},
+								{
+									label: '沙依巴克区'
+								},
+								{
+									label: '水磨沟区'
+								},
+								{
+									label: '经开区'
+								},
+								{
+									label: '新市区'
+								},
+								{
+									label: '米东区',
+									desc: "作者所居住的地区"
+								},
+								{
+									label: '达坂城区'
+								},
+								{
+									label: '乌鲁木齐县'
+								}
+							]
+						}]
+					},{
+						label:"西藏自治区"
+					}]
+				},
+				methods: {
+					getCode(){
+						this.randomCoding =this.$refs.zcTree.randomCoding()
+					},
+					selected(v) {
+						this.content = v.label
+					},
+					treeFilter(list, content, back) {
+						let l = []
+						let result = searchList(list, content, l)
+						back(result)
+					},
+				},
+				mounted(){
+					console.log(this)
+				}
+			}
+			Vue.component('triangle-icon', triangleIcon)
+			Vue.component('tree-node', treeNode)
+			Vue.component('zc-tree', zcTree)
+			var app = new Vue(config)
+			
+			function searchList(list, content, l) {
+				if (!list || list.length == 0) {
+					return l
+				} else {
+					for (var i = 0; i < list.length; i++) {
+						search(list[i], content, l)
+					}
+					return l;
+				}
+			}
+			
+			function search(node, content, l) {
+				if (node.label.indexOf(content) >= 0) {
+					let str = JSON.stringify(node)
+					let copy = JSON.parse(str);
+					copy.children = []
+					l.push(copy)
+				}
+				let children = searchList(node.children, content, l)
+			}
+		</script>
+	</body>
+</html>

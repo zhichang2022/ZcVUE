@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 模板测试</title>
+		<script src='../../common/js/vue/vue.min.js'></script>
+		<script src='js/mixin.js'></script>
+	</head>
+	<body>
+		<div id="app">
+			<div>
+				content:{{content}}
+			</div>
+			<div>
+				msg:{{msg}}
+			</div>
+			<div>计算 1 + 2 = {{calc(1,2)}}</div>
+			<div v-html="console"></div>
+		</div>
+
+		<script>
+			var app = {
+				mixins: [mixin],
+				el: '#app',
+				data: {
+					content: 'app content',
+				},
+				mounted() {
+					this.console += "<br> app mounted"
+				}
+			}
+			new Vue(app)
+		</script>
+	</body>
+</html>

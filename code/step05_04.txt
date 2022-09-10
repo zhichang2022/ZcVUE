@@ -1,0 +1,46 @@
+<template>
+	<div class="tree-node">
+		<div :name="name" class="tree-node-content" :style="{'padding-left': paddingLeft}">
+			<triangle-icon @click="selected" class="tree-icon" :expanded="show" v-if="children && children.length > 0">
+			</triangle-icon>
+			<div v-else class="tree-icon-blank"></div>
+			<span @click="selected">{{label}}</span>
+			<div class="tree-right">
+				<div class="tree-node-right-content">
+				<!-- 多个插槽是需要使用name进行区分  -->
+					<slot name="content" :data="self" :label="label"></slot>
+				</div>
+				<!-- 为插槽定义属性绑定, 父组件可以通过对象进行接收, 如果slot 没有定义名称,则名称为 default  -->
+				<slot :data="self"></slot>
+			</div>
+		</div>
+		<div class="tree-node-children" v-show="show">
+			<tree-node :name="name+'_'+index" v-for="(item,index) in children" :label="item.label"
+				:children="item.children" :level="item.level" :self="item" @selected="selectedEvent">
+				<template #default="{data}">
+					<slot :data="data"></slot>
+				</template>
+				<!-- 不同的插槽模板使用#name进行区分  -->
+				<template #content="{data,label}">
+					<slot name="content" :data="data" :label="label"></slot>
+				</template>
+			</tree-node>
+		</div>
+	</div>
+</template>
+
+
+<div id="app">
+	<tree-node :name="treeNode.name" :label="treeNode.label" :children="treeNode.children"
+		:level="treeNode.level" :self="treeNode" @selected="showSelectedNode">
+		<!-- content 插槽  -->
+		<template #content="{data}">
+			{{data.desc}}
+		</template>
+		<!-- 默认插槽 -->
+		<template #default="slotData">
+			<button @click="content = slotData">点击</button>
+		</template>
+	</tree-node>
+	<div>选中节点的data：{{content.data}}</div>
+</div>

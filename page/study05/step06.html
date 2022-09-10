@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>简单树形组件06</title>
+		<script src='../../common/js/vue/vue.min.js'></script>
+		<script src="js/base64.js"></script>
+		<script src="js/md5.js"></script>
+		<script src='js/import.js'></script>
+		<style>
+			button {
+				background: #c8cf3c;
+				color: #fff;
+				border: none;
+				line-height: 20px;
+				border-radius: 5px;
+				box-shadow: 1px 1px 3px 0 #999;
+				margin-right: 10px;
+				font-size: 13px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<zc-tree :list="treeList" @selected="selected">
+				<template #default="{data}">
+					{{data.desc}}
+				</template>
+			</zc-tree>
+			<div>选中节点的data：{{content}}</div>
+		</div>
+		<script>
+			const zcTree = ImportHtml("components/zc-tree_01")
+			const treeNode = ImportHtml("components/tree-node6")
+			const triangleIcon = ImportHtml("components/triangle-icon")
+			var config = {
+				el: '#app',
+				data: {
+					content: "",
+					treeList: [{
+						label: '新疆维吾尔自治区',
+						children: [{
+							label: '乌鲁木齐市',
+							children: [{
+									label: '天山区',
+									children: [{
+										label: '人民广场'
+									}]
+								},
+								{
+									label: '沙依巴克区'
+								},
+								{
+									label: '水磨沟区'
+								},
+								{
+									label: '经开区'
+								},
+								{
+									label: '新市区'
+								},
+								{
+									label: '米东区',
+									desc: "作者所居住的地区"
+								},
+								{
+									label: '达坂城区'
+								},
+								{
+									label: '乌鲁木齐县'
+								}
+							]
+						}]
+					},{
+						label:"西藏自治区"
+					}]
+				},
+				methods: {
+					selected(v) {
+						this.content = v.label
+					}
+				},
+			}
+			Vue.component('triangle-icon', triangleIcon)
+			Vue.component('tree-node', treeNode)
+			Vue.component('zc-tree', zcTree)
+			var app = new Vue(config)
+		</script>
+	</body>
+</html>

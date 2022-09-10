@@ -1,0 +1,9 @@
+<z-input label="姓名" data-value="name" required></z-input>
+<z-input label="联系方式" data-value="phone"></z-input>
+<button onclick="showInfo()">查看个人信息</button>
+<script>
+	var dataManager = {}
+	function showInfo() {
+		alert("姓名：" + dataManager.name + "\n 联系方式：" + dataManager.phone)
+	}
+</script>

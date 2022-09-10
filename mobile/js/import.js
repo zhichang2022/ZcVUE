@@ -56,6 +56,8 @@ function ImportContent(url, type) {
 				}
 				let tempVue = eval("function " + objName + "(){return" + j + "};" + objName + "();")
 				tempVue.template = h
+				console.log("装载组件"+url +":")
+				console.log(tempVue)
 				resolve(tempVue)
 			} else {
 				xmlHttp.send(null);
@@ -73,6 +75,7 @@ function ImportContent(url, type) {
 				}
 			}
 		} catch (exception) {
+			console.log("出错文件为:" + url)
 			reject(exception)
 		}
 	})

@@ -1,0 +1,36 @@
+<template>
+	<div class="tree-node">
+		<div :name="name" class="tree-node-content" :style="{'padding-left': paddingLeft}">
+			<triangle-icon @click="selected" class="tree-icon" :expanded="show" v-if="children && children.length > 0">
+			</triangle-icon>
+			<div v-else class="tree-icon-blank"></div>
+			<span @click="selected">{{label}}</span>
+			<div class="tree-right">
+				<!-- 定义一个简单的插槽 -->
+				<slot></slot>
+			</div>
+		</div>
+		<div class="tree-node-children" v-show="show">
+			<tree-node :name="name+'_'+index" v-for="(item,index) in children" :label="item.label"
+				:children="item.children" :level="item.level" :self="item" @selected="selectedEvent">
+			</tree-node>
+		</div>
+	</div>
+</template>
+
+<!DOCTYPE html>
+<html>
+	<body>
+		<div id="app">
+			<tree-node :name="treeNode.name" :label="treeNode.label" :children="treeNode.children"
+				:level="treeNode.level" :self="treeNode" @selected="showSelectedNode">
+				<!-- 作为组件的子元素,将绑定到组件的插槽中 -->
+				<button>点击</button>
+			</tree-node>
+			<div>你选择的节点：{{content}}</div>
+		</div>
+		<script>
+			... ...
+		</script>
+	</body>
+</html>
