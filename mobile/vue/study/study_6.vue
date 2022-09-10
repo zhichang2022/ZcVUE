@@ -1,6 +1,6 @@
 <template>
 	<div class="study_3">
-		<study-page title="VUE属性">
+		<study-page title="混入">
 			<text-panel :title="list[0].title" :content="list[0].content" :color="list[0].color"></text-panel>
 			<text-panel :title="list[1].title" :content="list[1].content" :color="list[1].color">
 				<iframe-panel title="混入示例" url="page/study06/demo1.html" desc="以上是页面显示效果,以下是示例代码" height="200px">
