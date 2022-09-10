@@ -1,6 +1,6 @@
 <template>
 	<div class="study_3">
-		<study-page title="VUE属性">
+		<study-page title="其他">
 			<text-panel :title="list[0].title" :content="list[0].content" :color="list[0].color">
 				<div>
 					在以上的六节中，我们简单的了解了vue的常用指令、属性、生命周期、组件等，
